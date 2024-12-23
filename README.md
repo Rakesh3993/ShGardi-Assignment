@@ -88,7 +88,8 @@ Displays the selected celebrity’s details using labels and an image view.
 <img width="350" alt="Screenshot 2024-12-24 at 12 01 06 AM" src="https://github.com/user-attachments/assets/af3a8634-37d3-43c0-8ceb-7bb10a6efea9" />
 <img width="352" alt="Screenshot 2024-12-24 at 12 01 42 AM" src="https://github.com/user-attachments/assets/1c1cb9e8-a62a-4057-9ed7-8d5ead9d2122" />
 <img width="347" alt="Screenshot 2024-12-24 at 12 02 11 AM" src="https://github.com/user-attachments/assets/93c0ef10-0ad3-4982-b96f-f957fbe36e72" />
-<img width="354" alt="Screenshot 2024-12-24 at 12 02 32 AM" src="https://github.com/user-attachments/assets/7bc66067-288b-4d8c-9fe1-24558c2474b8" />
+<img width="356" alt="Screenshot 2024-12-24 at 2 55 39 AM" src="https://github.com/user-attachments/assets/0be47f3b-e8df-4814-895e-b01fac30e2c6" />
+
 
 
 
