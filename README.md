@@ -59,7 +59,7 @@ Displays the selected celebrity’s details using labels and an image view.
 ## 5. APIs
 
 #### 5.1 Normal Celebrity API for fetching ID
-* URL: https://api.themoviedb.org/3/person/popular?api_key=697d439ac993538da4e3e60b54e762&page=1"
+* URL: https://api.themoviedb.org/3/person/popular?api_key=697d439ac993538da4e3e60b54e762cd&page=1"
 * Purpose: Retrieves the celebrity's profile image and id for retriving specific person detail.
 
 #### 5.2 Searching API
