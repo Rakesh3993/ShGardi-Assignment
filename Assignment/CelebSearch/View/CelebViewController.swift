@@ -45,11 +45,18 @@ class CelebViewController: UIViewController {
         loadPersonData(page: currentPage)
         navigationItem.searchController = personSearchResult
         personSearchResult.searchResultsUpdater = self
-//        definesPresentationContext = true
     }
     
     func setupNavigation() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.black
+        ]
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         title = "Celebrity"
+       
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
     }
@@ -66,6 +73,7 @@ class CelebViewController: UIViewController {
     }
     
     func setupView() {
+        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         view.addSubview(personTableView)
         personTableView.delegate = self
         personTableView.dataSource = self
