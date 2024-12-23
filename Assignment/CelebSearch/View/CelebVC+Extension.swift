@@ -10,7 +10,7 @@ import UIKit
 extension CelebViewController: APICallerDelegate {
     func fetchPopularPerson(with list: [PersonResults], fromSearch: Bool) {
         if fromSearch {
-            self.personList = list
+            self.searchedPersonList = list
         } else {
             isLoading = false
             if currentPage == 1 {
@@ -19,6 +19,7 @@ extension CelebViewController: APICallerDelegate {
                 self.personList.append(contentsOf: list)
             }
         }
+        personTableView.reloadData()
     }
 }
 
@@ -34,6 +35,7 @@ extension CelebViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: data)
         cell.textLabel?.textColor = .black
         
+        // chevron Button for each cell
         let chevronButton = UIButton(type: .system)
         let image = UIImage(systemName: "chevron.right")?
             .withRenderingMode(.alwaysTemplate)
@@ -69,11 +71,11 @@ extension CelebViewController: UITableViewDelegate, UITableViewDataSource {
         apiCaller.personProfileData(id: personData.id ?? 0) { result in
             switch result {
             case .success(let data):
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
                     let vc = PersonBioViewController()
                     vc.configure(with: data)
                     vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true)
+                    self?.present(vc, animated: true)
                 }
             case .failure(let error):
                 print(error)
@@ -88,6 +90,6 @@ extension CelebViewController: UISearchResultsUpdating {
         
         guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 3, let resultController = searchController.searchResultsController as? PersonSearchResultViewController else { return }
         apiCaller.searchCelebData(query: query)
-        resultController.configure(with: self.personList)
+        resultController.configure(with: self.searchedPersonList)
     }
 }

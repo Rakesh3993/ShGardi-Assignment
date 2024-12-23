@@ -9,6 +9,19 @@ import UIKit
 
 class PersonBioViewController: UIViewController {
     
+    private var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.isScrollEnabled = true
+        return scroll
+    }()
+    
+    private var contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     var personImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -69,7 +82,7 @@ class PersonBioViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.textColor = .black
         label.text = "About"
         return label
@@ -79,7 +92,7 @@ class PersonBioViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .light)
         label.textColor = .gray
         return label
     }()
@@ -88,10 +101,13 @@ class PersonBioViewController: UIViewController {
         let button = UIButton()
         let image = UIImage(systemName: "chevron.left")?
             .withTintColor(.black, renderingMode: .alwaysOriginal)
-            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default))
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default))
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        button.layer.cornerRadius = 15
+        button.layer.masksToBounds = true
+        button.backgroundColor = .white
         return button
     }()
     
@@ -142,46 +158,67 @@ class PersonBioViewController: UIViewController {
     }
 
     func setupView() {
+        view.addSubview(scrollView)
         view.addSubview(backButton)
-        view.addSubview(personImage)
-        view.addSubview(nameLabel)
-        view.addSubview(birthStack)
-        view.addSubview(placeStack)
-        view.addSubview(descriptionStack)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(personImage)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(birthStack)
+        contentView.addSubview(placeStack)
+        contentView.addSubview(descriptionStack)
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 55),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            personImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            personImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            // ContentView constraints
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            // BackButton constraints
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            backButton.widthAnchor.constraint(equalToConstant: 30),
+            backButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            // PersonImage constraints
+            personImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            personImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             personImage.widthAnchor.constraint(equalToConstant: 150),
             personImage.heightAnchor.constraint(equalToConstant: 150),
             
+            // NameLabel constraints
             nameLabel.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 10),
-            nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nameLabel.heightAnchor.constraint(equalToConstant: 51),
+            nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            placeStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            placeStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            placeStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+            // PlaceStack constraints
+            placeStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
+            placeStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            placeStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             placeStack.heightAnchor.constraint(equalToConstant: 40),
             
             dopTextLabel.leadingAnchor.constraint(equalTo: placeStack.leadingAnchor, constant: 20),
             
-            birthStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            birthStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            // BirthStack constraints
             birthStack.topAnchor.constraint(equalTo: placeStack.bottomAnchor, constant: 2),
+            birthStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            birthStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             birthStack.heightAnchor.constraint(equalToConstant: 40),
             
             dobTextLabel.leadingAnchor.constraint(equalTo: birthStack.leadingAnchor, constant: 20),
             
+            // DescriptionStack constraints
             descriptionStack.topAnchor.constraint(equalTo: birthStack.bottomAnchor, constant: 2),
-            descriptionStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            descriptionStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            descriptionStack.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            descriptionStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            descriptionStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            descriptionStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
             descriptionLabel.leadingAnchor.constraint(equalTo: descriptionStack.leadingAnchor, constant: 10),
             descriptionLabel.trailingAnchor.constraint(equalTo: descriptionStack.trailingAnchor, constant: -10)

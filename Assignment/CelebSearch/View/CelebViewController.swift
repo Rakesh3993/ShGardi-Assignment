@@ -11,13 +11,8 @@ class CelebViewController: UIViewController {
     
     var apiCaller = APICaller()
     
-    var personList: [PersonResults] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.personTableView.reloadData()
-            }
-        }
-    }
+    var personList: [PersonResults] = []
+    var searchedPersonList: [PersonResults] = []
     
     var currentPage = 1
     var isLoading: Bool = false
@@ -32,7 +27,7 @@ class CelebViewController: UIViewController {
     
     private var personSearchResult: UISearchController = {
         let controller = UISearchController(searchResultsController: PersonSearchResultViewController())
-        controller.searchBar.placeholder = "Search actors, directors"
+        controller.searchBar.placeholder = AppConstants.searchBarPlaceHolderText
         return controller
     }()
 
@@ -55,7 +50,7 @@ class CelebViewController: UIViewController {
         ]
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        title = "Celebrity"
+        title = AppConstants.navTitle
        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
