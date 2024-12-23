@@ -13,7 +13,7 @@ class PersonListTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.cornerRadius = 40
+        image.layer.cornerRadius = 30
         image.layer.masksToBounds = true
         return image
     }()
@@ -46,10 +46,10 @@ class PersonListTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             personImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             personImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            personImage.widthAnchor.constraint(equalToConstant: 80),
-            personImage.heightAnchor.constraint(equalToConstant: 80),
+            personImage.widthAnchor.constraint(equalToConstant: 60),
+            personImage.heightAnchor.constraint(equalToConstant: 60),
             
-            nameLabel.leadingAnchor.constraint(equalTo: personImage.trailingAnchor, constant: 20),
+            nameLabel.leadingAnchor.constraint(equalTo: personImage.trailingAnchor, constant: 25),
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
