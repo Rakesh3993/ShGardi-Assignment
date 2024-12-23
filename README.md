@@ -4,8 +4,8 @@
 App Name:
 Celebrity Info Viewer (Assumed name)
 
-Purpose:
-A table-view-based app that displays a list of celebrities, allowing users to view detailed information such as name, profile picture, date of birth, and place of birth.
+### Purpose:
+A table-view-based app that displays a infinite list of celebrities like actors and directors as mentioned in Assignment, allowing users to view detailed information such as name, profile picture, date of birth, and place of birth.
 
 ## 2. Features
 ### Celebrity List: 
