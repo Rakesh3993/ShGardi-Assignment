@@ -31,6 +31,56 @@ PersonBioViewController: Displays detailed information about the selected celebr
 ### ViewModel:
 APICaller acts as intermediatary between Model and View
 
+## 4. Code Documentation
+ ### 4.1 Model: PersonBioModel
+ * Description: Represents the details of a celebrity.
+ * Properties: <br>
+      name: Celebrity's name (String). <br>
+      profile_path: Path to the profile picture (String). <br>
+      birthday: Celebrity's date of birth (String). <br>
+      place_of_birth: Celebrity's place of birth (String).
+
+### 4.2 PersonListViewController
+Responsible for managing the table view and navigating to the PersonBioViewController.
+
+#### Key methods:
+* viewDidLoad(): Initializes table view.
+* tableView(_:cellForRowAt:): Configures cells with chevronButton and celebrity details.
+* tableView(_:didSelectRowAt:): Handles navigation to PersonBioViewController.
+
+### 4.3 PersonBioViewController
+Displays the selected celebrity’s details using labels and an image view.
+
+#### Key methods:
+* setupNavigation(): Configures navigation bar styles.
+* configure(with:): Fetches and displays detailed celebrity info.
+* setupConstraints(): Applies layout constraints for the UI components.
+
+## 5. APIs
+
+#### 5.1 Normal Celebrity API for fetching ID
+* URL: https://api.themoviedb.org/3/person/popular?api_key=697d439ac993538da4e3e60b54e762&page=1"
+* Purpose: Retrieves the celebrity's profile image and id for retriving specific person detail.
+
+#### 5.2 Searching API
+* URL: https://api.themoviedb.org/3/search/person?api_key=697d439ac993538da4e3e60b54e762cd&query=tom%20cruise")
+* Purpose: Searching and Retrieves the celebrity's profile image and id for retriving specific person detail
+
+#### 5.3 Celebrity Detail API
+* URL: https://api.themoviedb.org/3/person/500?api_key=697d439ac993538da4e3e60b54e762
+* Purpose: Retrieves the celebrity's detail like profile image, date of birth, place and description.
+
+#### 5.4 Image API
+* URL: https://image.tmdb.org/t/p/w500/{profile_path}
+* Purpose: Retrieves the celebrity's profile image.
+
+## 6. Future Enhancements
+* Add search functionality to filter celebrities.
+* Include a favorites feature for saving profiles.
+* Allow sharing celebrity profiles via social media.
+* Refactor UI using SwiftUI for better modularity and modern designs.
+
+
 
 # ScreenShots:
 
