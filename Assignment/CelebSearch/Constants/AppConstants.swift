@@ -11,3 +11,9 @@ struct AppConstants {
     static let baseURL = "https://api.themoviedb.org"
     static let API_KEY = "697d439ac993538da4e3e60b54e762cd"
 }
+
+
+struct identifier {
+    static let personListTableViewCell = "PersonListTableViewCell"
+}
+

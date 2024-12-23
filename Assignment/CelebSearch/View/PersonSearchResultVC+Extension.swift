@@ -13,8 +13,10 @@ extension PersonSearchResultViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "resultcell", for: indexPath)
-        cell.textLabel?.text = personList[indexPath.row].name
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier.personListTableViewCell, for: indexPath) as? PersonListTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configure(with: personList[indexPath.row])
         
         let chevronButton = UIButton(type: .system)
         let image = UIImage(systemName: "chevron.right")?
@@ -33,14 +35,14 @@ extension PersonSearchResultViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let personData = personList[indexPath.row]
-        apiCaller.personProfileData(id: personData.id ?? 0) { result in
+        apiCaller.personProfileData(id: personData.id ?? 0) {[weak self] result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
                     let vc = PersonBioViewController()
                     vc.configure(with: data)
                     vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true)
+                    self?.present(vc, animated: true)
                 }
             case .failure(let error):
                 print(error)
@@ -49,6 +51,6 @@ extension PersonSearchResultViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 110
     }
 }

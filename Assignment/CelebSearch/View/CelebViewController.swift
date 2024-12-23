@@ -26,7 +26,7 @@ class CelebViewController: UIViewController {
         let table = UITableView(frame: .zero, style: .grouped)
         table.showsVerticalScrollIndicator = false
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(PersonListTableViewCell.self, forCellReuseIdentifier: identifier.personListTableViewCell)
         return table
     }()
     

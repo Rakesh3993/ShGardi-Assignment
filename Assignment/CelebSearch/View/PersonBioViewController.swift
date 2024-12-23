@@ -156,7 +156,7 @@ class PersonBioViewController: UIViewController {
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             
             personImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            personImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10),
+            personImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             personImage.widthAnchor.constraint(equalToConstant: 150),
             personImage.heightAnchor.constraint(equalToConstant: 150),
             
@@ -192,8 +192,8 @@ class PersonBioViewController: UIViewController {
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.profile_path ?? "")") else { return }
         URLSession.shared.dataTask(with: url) { data, _, _ in
             guard let data = data, let uiimage = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self.personImage.image = uiimage
+            DispatchQueue.main.async {[weak self] in
+                self?.personImage.image = uiimage
             }
         }.resume()
         

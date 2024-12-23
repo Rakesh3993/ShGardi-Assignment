@@ -28,10 +28,10 @@ extension CelebViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier.personListTableViewCell, for: indexPath) as! PersonListTableViewCell
         let data = personList[indexPath.row]
         cell.backgroundColor = .white
-        cell.textLabel?.text = data.name ?? ""
+        cell.configure(with: data)
         cell.textLabel?.textColor = .black
         
         let chevronButton = UIButton(type: .system)

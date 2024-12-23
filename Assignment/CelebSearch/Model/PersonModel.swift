@@ -15,4 +15,5 @@ struct PersonResults: Codable {
     let name: String?
     let original_name: String?
     let id: Int?
+    let profile_path: String?
 }

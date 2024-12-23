@@ -23,7 +23,7 @@ class PersonSearchResultViewController: UIViewController {
         let table = UITableView(frame: .zero, style: .grouped)
         table.showsVerticalScrollIndicator = false
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "resultcell")
+        table.register(PersonListTableViewCell.self, forCellReuseIdentifier: identifier.personListTableViewCell)
         return table
     }()
 
