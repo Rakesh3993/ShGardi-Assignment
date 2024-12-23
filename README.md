@@ -67,7 +67,7 @@ Displays the selected celebrity’s details using labels and an image view.
 * Purpose: Searching and Retrieves the celebrity's profile image and id for retriving specific person detail
 
 #### 5.3 Celebrity Detail API
-* URL: https://api.themoviedb.org/3/person/500?api_key=697d439ac993538da4e3e60b54e762
+* URL: https://api.themoviedb.org/3/person/500?api_key=697d439ac993538da4e3e60b54e762cd
 * Purpose: Retrieves the celebrity's detail like profile image, date of birth, place and description.
 
 #### 5.4 Image API
