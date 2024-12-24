@@ -30,6 +30,21 @@ class CelebViewController: UIViewController {
         controller.searchBar.placeholder = AppConstants.searchBarPlaceHolderText
         return controller
     }()
+    
+    var scrollToTopButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemGray.withAlphaComponent(0.6)
+        let image = UIImage(systemName: "arrow.up")?
+            .withRenderingMode(.alwaysTemplate)
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .thin, scale: .default))
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true 
+        button.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +55,10 @@ class CelebViewController: UIViewController {
         loadPersonData(page: currentPage)
         navigationItem.searchController = personSearchResult
         personSearchResult.searchResultsUpdater = self
+    }
+    
+    @objc func scrollToTop() {
+        personTableView.setContentOffset(CGPoint(x: 0, y: -90), animated: true)
     }
     
     func setupNavigation() {
@@ -70,11 +89,19 @@ class CelebViewController: UIViewController {
     func setupView() {
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         view.addSubview(personTableView)
+        view.addSubview(scrollToTopButton)
         personTableView.delegate = self
         personTableView.dataSource = self
     }
     
     func setupConstraints() {
         personTableView.pin(to: view)
+        
+        NSLayoutConstraint.activate([
+            scrollToTopButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollToTopButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            scrollToTopButton.widthAnchor.constraint(equalToConstant: 40),
+            scrollToTopButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
 }

@@ -82,8 +82,8 @@ class PersonBioViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.textColor = .darkGray
         label.text = "About"
         return label
     }()
@@ -93,15 +93,16 @@ class PersonBioViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        label.textAlignment = .justified
         label.textColor = .gray
         return label
     }()
     
-    private var backButton: UIButton = {
+    private lazy var backButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "chevron.left")?
-            .withTintColor(.black, renderingMode: .alwaysOriginal)
-            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default))
+            .withRenderingMode(.alwaysTemplate)
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 15, weight: .regular, scale: .default))
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
@@ -183,7 +184,7 @@ class PersonBioViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             // BackButton constraints
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             backButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             backButton.widthAnchor.constraint(equalToConstant: 30),
             backButton.heightAnchor.constraint(equalToConstant: 30),
@@ -220,8 +221,8 @@ class PersonBioViewController: UIViewController {
             descriptionStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             descriptionStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
-            descriptionLabel.leadingAnchor.constraint(equalTo: descriptionStack.leadingAnchor, constant: 10),
-            descriptionLabel.trailingAnchor.constraint(equalTo: descriptionStack.trailingAnchor, constant: -10)
+            descriptionLabel.leadingAnchor.constraint(equalTo: descriptionStack.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: descriptionStack.trailingAnchor, constant: -20)
         ])
     }
     

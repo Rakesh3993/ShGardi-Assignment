@@ -54,9 +54,9 @@ extension CelebViewController: UITableViewDelegate, UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentHeight = scrollView.contentSize.height
         let currentOffset = scrollView.contentOffset.y
+        scrollToTopButton.isHidden = currentOffset < 100
         let frameHeight = scrollView.frame.size.height
         let threshold: CGFloat = 50
-        
         if contentHeight - currentOffset <= frameHeight + threshold {
             loadNextPageIfNeeded()
         }
@@ -88,7 +88,7 @@ extension CelebViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         
-        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 3, let resultController = searchController.searchResultsController as? PersonSearchResultViewController else { return }
+        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 2, let resultController = searchController.searchResultsController as? PersonSearchResultViewController else { return }
         apiCaller.searchCelebData(query: query)
         resultController.configure(with: self.searchedPersonList)
     }
