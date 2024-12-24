@@ -156,7 +156,7 @@ class PersonBioViewController: UIViewController {
     @objc func backButtonPressed() {
         self.dismiss(animated: true)
     }
-
+    
     func setupView() {
         view.addSubview(scrollView)
         view.addSubview(backButton)
@@ -236,7 +236,23 @@ class PersonBioViewController: UIViewController {
         
         nameLabel.text = model.name ?? "No Name Available"
         dopLabel.text = model.place_of_birth ?? "nil"
-        dobLabel.text = model.birthday ?? "nil"
+        dobLabel.text = dateFormat(date: model.birthday ?? "")
         descriptionLabel.text = model.biography ?? "No description Available for this person"
+    }
+    
+    func dateFormat(date: String) -> String {
+        let jsonDate = date
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let date = inputFormatter.date(from: jsonDate) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "dd MMM yyyy"
+            let formattedDate = outputFormatter.string(from: date)
+            return formattedDate
+        } else {
+            return "nil"
+        }
     }
 }
