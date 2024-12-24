@@ -31,7 +31,7 @@ class CelebViewController: UIViewController {
         return controller
     }()
     
-    var scrollToTopButton: UIButton = {
+    lazy var scrollToTopButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray.withAlphaComponent(0.6)
         let image = UIImage(systemName: "arrow.up")?
